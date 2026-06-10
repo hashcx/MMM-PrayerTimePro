@@ -400,68 +400,48 @@ Module.register("MMM-PrayerTimePro", {
 
   /* Fast refresh of only the countdown element (no full DOM rebuild) */
   _refreshCountdownEl () {
-    // Update timer
     const timerEl = document.getElementById(`ptp-countdown-${this.identifier}`);
+    const labelEl = document.getElementById(`ptp-countdown-label-${this.identifier}`);
+    const banner  = document.getElementById(`ptp-banner-${this.identifier}`);
+
+    // Update timer
     if (timerEl) timerEl.textContent = this.countdown;
 
     // Update label (next prayer name)
-    const labelEl = document.getElementById(`ptp-countdown-label-${this.identifier}`);
     if (labelEl && this.nextPrayerName) {
       labelEl.textContent = `${this.translate("NEXT")}: ${this._prayerLabel(this.nextPrayerName)}`;
     }
 
-    // Countdown alert animation on the banner
-    const banner = document.getElementById(`ptp-banner-${this.identifier}`);
-    if (banner) {
-      const alert       = this.config.countdownAlert;
-      const shouldAlert = alert && alert.enabled &&
-                          this.countdownMins !== null &&
-                          this.countdownMins <= alert.threshold &&
-                          this.countdownMins > 0;
+    // Countdown alert: animate the banner box with inverted colors
+    const alert       = this.config.countdownAlert;
+    const shouldAlert = alert && alert.enabled &&
+                        this.countdownMins !== null &&
+                        this.countdownMins <= alert.threshold &&
+                        this.countdownMins > 0;
 
-      // Remove existing animation and color classes
+    if (banner) {
       banner.classList.forEach(cls => {
         if (cls.startsWith("ptp-anim-")) banner.classList.remove(cls);
       });
-      banner.classList.remove("ptp-alert-inverted");
       banner.style.removeProperty("background");
-      banner.style.removeProperty("border-color");
-      banner.style.removeProperty("color");
-      banner.style.removeProperty("--ptp-alert-color");
+      if (labelEl) labelEl.style.removeProperty("color");
+      if (timerEl) timerEl.style.removeProperty("color");
 
       if (shouldAlert) {
-        const alertColor = alert.color || null;
-
-        if (alert.animation) {
-          banner.classList.add(`ptp-anim-${alert.animation}`);
-        }
-
-        if (alertColor) {
-          banner.style.setProperty("--ptp-alert-color", alertColor);
-          if (alert.invertColors) {
-            banner.classList.add("ptp-alert-inverted");
-            banner.style.background  = alertColor;
-            banner.style.borderColor = alertColor;
-            banner.style.color       = "#fff";
-          } else {
-            // Tint mode — colored border + text
-            banner.style.borderColor = alertColor;
-            banner.style.color       = alertColor;
-          }
-        } else if (alert.invertColors) {
-          // No custom color — invert using accent color
-          banner.classList.add("ptp-alert-inverted");
-          banner.style.background  = "var(--ptp-accent)";
-          banner.style.borderColor = "var(--ptp-accent)";
-          banner.style.color       = "#000";
-        }
+        if (alert.animation) banner.classList.add(`ptp-anim-${alert.animation}`);
+        banner.style.background = alert.color || "var(--ptp-accent)";
+        if (labelEl) labelEl.style.color = "#fff";
+        if (timerEl) timerEl.style.color = "#fff";
       }
     }
 
-    // Update progress bar fill
     if (this.config.showProgressBar) {
       const fillEl = document.getElementById(`ptp-progress-${this.identifier}`);
-      if (fillEl) fillEl.style.width = `${this._calcProgressPct()}%`;
+      if (fillEl) {
+        fillEl.style.width = `${this._calcProgressPct()}%`;
+        if (shouldAlert) fillEl.style.background = "#fff";
+        else             fillEl.style.removeProperty("background");
+      }
     }
 
     // Update next-prayer row highlight

@@ -47,7 +47,6 @@
   justify-content: space-between;
   align-items: center;
   background: var(--ptp-next-bg);
-  border: 1px solid var(--ptp-next-border);
   border-radius: 6px;
   padding: 5px 12px;
   margin-bottom: 10px;
@@ -86,8 +85,6 @@
 /* Next prayer highlight */
 .ptp-row.ptp-next td {
   background: var(--ptp-next-bg);
-  border-top:    1px solid var(--ptp-next-border);
-  border-bottom: 1px solid var(--ptp-next-border);
 }
 .ptp-row.ptp-next td:first-child { border-left: 3px solid var(--ptp-next-border); }
 
