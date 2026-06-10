@@ -1,0 +1,368 @@
+/* MMM-PrayerTimePro — Stylesheet */
+
+:root {
+  --ptp-accent:      #40bfff;
+  --ptp-next-bg:     rgba(64, 191, 255, 0.12);
+  --ptp-next-border: #40bfff;
+  --ptp-past-opacity: 0.45;
+  --ptp-text:        #fff;
+  --ptp-subtext:     #aaa;
+  --ptp-header-size: 0.85em;
+  --ptp-row-gap:     6px;
+}
+
+.MMM-PrayerTimePro {
+  font-family: inherit;
+  color: var(--ptp-text);
+}
+
+/* RTL support */
+.MMM-PrayerTimePro.ptp-rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.ptp-header {
+  text-align: center;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.ptp-gregorian-date {
+  font-size: var(--ptp-header-size);
+  color: var(--ptp-subtext);
+  text-transform: capitalize;
+}
+
+.ptp-hijri-date {
+  font-size: var(--ptp-header-size);
+  color: var(--ptp-accent);
+  letter-spacing: 0.03em;
+}
+
+/* ── Countdown banner ────────────────────────────────────── */
+.ptp-countdown-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--ptp-next-bg);
+  border: 1px solid var(--ptp-next-border);
+  border-radius: 6px;
+  padding: 5px 12px;
+  margin-bottom: 10px;
+  font-size: 0.85em;
+}
+
+.ptp-countdown-label {
+  color: var(--ptp-subtext);
+}
+
+.ptp-countdown-timer {
+  color: var(--ptp-accent);
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+  min-width: 55px;
+  text-align: right;
+}
+
+/* ── Prayer table ────────────────────────────────────────── */
+.ptp-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 3px;
+}
+
+.ptp-row td {
+  padding: 4px 8px;
+  vertical-align: middle;
+  border-radius: 0;
+}
+
+.ptp-row td:first-child { border-radius: 5px 0 0 5px; }
+.ptp-row td:last-child  { border-radius: 0 5px 5px 0; }
+
+/* Next prayer highlight */
+.ptp-row.ptp-next td {
+  background: var(--ptp-next-bg);
+  border-top:    1px solid var(--ptp-next-border);
+  border-bottom: 1px solid var(--ptp-next-border);
+}
+.ptp-row.ptp-next td:first-child { border-left: 3px solid var(--ptp-next-border); }
+
+/* Past prayer dim */
+.ptp-row.ptp-past {
+  opacity: var(--ptp-past-opacity);
+}
+
+/* Cells */
+.ptp-icon-cell {
+  width: 24px;
+  text-align: center;
+  padding-right: 4px;
+}
+
+.ptp-icon {
+  font-size: 0.9em;
+  opacity: 0.75;
+  width: 1em;
+  display: inline-block;
+  text-align: center;
+}
+
+.ptp-name-cell {
+  text-align: left;
+  white-space: nowrap;
+  padding-right: 16px;
+}
+
+.ptp-time-cell {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.ptp-iqama-cell {
+  text-align: right;
+  font-size: 0.75em;
+  color: var(--ptp-subtext);
+  padding-left: 8px;
+  white-space: nowrap;
+}
+
+/* ── Horizontal mode ─────────────────────────────────────── */
+.ptp-mode-horizontal .ptp-table {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ptp-mode-horizontal .ptp-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+}
+.ptp-mode-horizontal .ptp-row td {
+  padding: 1px 0;
+  border: none;
+  background: none !important;
+}
+.ptp-mode-horizontal .ptp-row.ptp-next {
+  border-color: var(--ptp-next-border);
+  background: var(--ptp-next-bg);
+}
+.ptp-mode-horizontal .ptp-time-cell { font-size: 1em; }
+.ptp-mode-horizontal .ptp-name-cell { font-size: 0.7em; color: var(--ptp-subtext); }
+
+/* ── Compact mode ────────────────────────────────────────── */
+.ptp-mode-compact .ptp-table { border-spacing: 0 1px; }
+.ptp-mode-compact .ptp-row td { padding: 2px 6px; font-size: 0.85em; }
+
+/* ── Section title ───────────────────────────────────────── */
+.ptp-section-title {
+  text-align: center;
+  color: var(--ptp-subtext);
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 10px 0 4px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 8px;
+}
+
+/* ── States ──────────────────────────────────────────────── */
+.ptp-loading,
+.ptp-error {
+  text-align: center;
+  padding: 12px;
+  color: var(--ptp-subtext);
+  font-size: 0.85em;
+}
+
+.ptp-error { color: #ff6b6b; }
+
+/* ── Compact multi-day table ─────────────────────────────── */
+.ptp-multiday-table {
+  border-spacing: 0 2px;
+}
+
+/* Day header row */
+.ptp-multiday-head th {
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ptp-subtext);
+  padding: 2px 8px 6px;
+  text-align: right;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Corner cell (prayer name column header) stays left */
+.ptp-multiday-corner {
+  text-align: left !important;
+}
+
+/* Delta-only mode: center all day headers */
+.ptp-delta-only-mode .ptp-multiday-head th {
+  text-align: center;
+}
+
+.ptp-multiday-today-header {
+  color: var(--ptp-accent) !important;
+}
+
+/* Prayer rows */
+.ptp-multiday-row td {
+  padding: 3px 8px;
+  vertical-align: top;
+}
+
+/* Today column — always right-aligned */
+.ptp-multiday-today-col {
+  color: #fff;
+  font-weight: 600;
+  text-align: right;
+  min-width: 48px;
+  vertical-align: top;
+}
+
+/* Future day columns — right-aligned when showing time, centered when delta-only */
+.ptp-multiday-future-col {
+  color: var(--ptp-subtext);
+  text-align: right;
+  min-width: 48px;
+  vertical-align: top;
+}
+
+.ptp-multiday-future-col.ptp-multiday-delta-only {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.ptp-delta-only-mode .ptp-multiday-row td {
+  vertical-align: middle;
+}
+
+/* Highlight next prayer across all columns */
+.ptp-multiday-row.ptp-next .ptp-multiday-today-col {
+  color: var(--ptp-accent);
+}
+
+/* Separator between today and future columns */
+.ptp-multiday-today-col {
+  border-right: 1px solid rgba(255,255,255,0.10);
+  padding-right: 12px;
+}
+.ptp-multiday-future-col:first-of-type {
+  padding-left: 12px;
+}
+
+/* ── Time delta badges ───────────────────────────────────── */
+.ptp-delta-time {
+  display: block;
+  text-align: right;
+}
+
+.ptp-delta-badge {
+  display: block;
+  font-size: 0.68em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-top: 1px;
+  text-align: center;
+}
+
+/* When time is hidden the badge is the only content — make it a bit larger */
+.ptp-multiday-future-col .ptp-delta-badge:only-child {
+  font-size: 0.82em;
+  margin-top: 0;
+}
+
+.ptp-delta-pos  { color: #ff8c69; }   /* later   → warm orange */
+.ptp-delta-neg  { color: #69d0a0; }   /* earlier → cool green  */
+.ptp-delta-zero { color: var(--ptp-subtext); }
+
+/* ── Progress bar ────────────────────────────────────────── */
+.ptp-countdown-banner {
+  flex-wrap: wrap;
+}
+
+.ptp-progress-track {
+  flex: 0 0 100%;
+  height: 3px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.ptp-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--ptp-accent);
+  border-radius: 2px;
+  transition: width 1s linear;
+}
+
+/* Alert color override for progress fill */
+.ptp-countdown-banner[style*="--ptp-alert-color"] .ptp-progress-fill {
+  background: var(--ptp-alert-color);
+}
+
+/* ── Countdown alert animations ──────────────────────────── */
+
+@keyframes ptp-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
+.ptp-anim-pulse {
+  animation: ptp-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes ptp-glow {
+  0%, 100% { box-shadow: 0 0 4px 1px var(--ptp-accent); }
+  50%       { box-shadow: 0 0 16px 5px var(--ptp-accent); }
+}
+.ptp-anim-glow {
+  animation: ptp-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes ptp-shake {
+  0%, 100%      { transform: translateX(0); }
+  15%, 55%, 95% { transform: translateX(-4px); }
+  35%, 75%      { transform: translateX(4px); }
+}
+.ptp-anim-shake {
+  animation: ptp-shake 0.7s ease-in-out infinite;
+}
+
+@keyframes ptp-bounce {
+  0%, 100% { transform: translateY(0); }
+  40%      { transform: translateY(-5px); }
+  60%      { transform: translateY(-2px); }
+}
+.ptp-anim-bounce {
+  animation: ptp-bounce 1s ease-in-out infinite;
+}
+
+/* Alert inverted state */
+.ptp-countdown-banner.ptp-alert-inverted {
+  border-radius: 6px;
+}
+
+/* Glow uses alert color when set, falls back to accent */
+.ptp-anim-glow {
+  animation: ptp-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes ptp-glow-colored {
+  0%, 100% { box-shadow: 0 0 4px 1px var(--ptp-alert-color); }
+  50%       { box-shadow: 0 0 16px 5px var(--ptp-alert-color); }
+}
+.ptp-anim-glow[style*="--ptp-alert-color"] {
+  animation: ptp-glow-colored 1.5s ease-in-out infinite;
+}

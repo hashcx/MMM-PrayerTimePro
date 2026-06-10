@@ -1,0 +1,16 @@
+{
+  "LOADING":      "Chargement des horaires de prière…",
+  "NEXT":         "Prochain",
+  "TOMORROW":     "Demain",
+  "PRAYER_TIME_TITLE": "Heure de Prière",
+  "IMSAK":        "Imsak",
+  "FAJR":         "Fajr",
+  "SUNRISE":      "Lever du Soleil",
+  "DHUHR":        "Dhuhr",
+  "ASR":          "Asr",
+  "SUNSET":       "Coucher du Soleil",
+  "MAGHRIB":      "Maghrib",
+  "ISHA":         "Isha",
+  "MIDNIGHT":     "Minuit",
+  "LASTTHIRD":    "Dernier Tiers"
+}

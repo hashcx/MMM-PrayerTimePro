@@ -1,0 +1,16 @@
+{
+  "LOADING":      "Namaz vakitleri yükleniyor…",
+  "NEXT":         "Sonraki",
+  "TOMORROW":     "Yarın",
+  "PRAYER_TIME_TITLE": "Namaz Vakti",
+  "IMSAK":        "İmsak",
+  "FAJR":         "Sabah",
+  "SUNRISE":      "Güneş Doğuşu",
+  "DHUHR":        "Öğle",
+  "ASR":          "İkindi",
+  "SUNSET":       "Güneş Batışı",
+  "MAGHRIB":      "Akşam",
+  "ISHA":         "Yatsı",
+  "MIDNIGHT":     "Gece Yarısı",
+  "LASTTHIRD":    "Son Üçte Bir"
+}

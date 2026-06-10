@@ -1,0 +1,13 @@
+{
+  "name": "mmm-prayertimepro",
+  "version": "1.0.0",
+  "description": "Robust, fully customizable MagicMirror² module for Islamic prayer times",
+  "main": "MMM-PrayerTimePro.js",
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": ["MagicMirror", "prayer", "islam", "salah", "adhan"],
+  "author": "MMM-PrayerTimePro contributors",
+  "license": "MIT",
+  "dependencies": {}
+}

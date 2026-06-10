@@ -1,0 +1,16 @@
+{
+  "LOADING":      "Memuatkan waktu solat…",
+  "NEXT":         "Seterusnya",
+  "TOMORROW":     "Esok",
+  "PRAYER_TIME_TITLE": "Waktu Solat",
+  "IMSAK":        "Imsak",
+  "FAJR":         "Subuh",
+  "SUNRISE":      "Syuruk",
+  "DHUHR":        "Zohor",
+  "ASR":          "Asar",
+  "SUNSET":       "Terbenam",
+  "MAGHRIB":      "Maghrib",
+  "ISHA":         "Isyak",
+  "MIDNIGHT":     "Tengah Malam",
+  "LASTTHIRD":    "Sepertiga Terakhir"
+}

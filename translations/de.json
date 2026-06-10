@@ -1,0 +1,16 @@
+{
+  "LOADING":      "Gebetszeiten werden geladen…",
+  "NEXT":         "Nächstes",
+  "TOMORROW":     "Morgen",
+  "PRAYER_TIME_TITLE": "Gebetszeit",
+  "IMSAK":        "Imsak",
+  "FAJR":         "Fadschr",
+  "SUNRISE":      "Sonnenaufgang",
+  "DHUHR":        "Dhuhr",
+  "ASR":          "Asr",
+  "SUNSET":       "Sonnenuntergang",
+  "MAGHRIB":      "Maghrib",
+  "ISHA":         "Isha",
+  "MIDNIGHT":     "Mitternacht",
+  "LASTTHIRD":    "Letztes Drittel"
+}
