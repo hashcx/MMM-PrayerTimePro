@@ -664,10 +664,18 @@ Module.register("MMM-PrayerTimePro", {
     const days      = this.multiDayData;
     const totalCols = Math.min(days.length, this.config.compactDays || 3);
 
+    // Find the entry whose calendar date matches today (handles stale cache where
+    // days[0] may be from a past date rather than the current calendar day).
+    const nowTuple = this._nowTupleInTz();
+    let calendarTodayIdx = days.findIndex(d => {
+      const t = this._parseTupleFromDateString(d.date);
+      return t && t.year === nowTuple.year && t.month === nowTuple.month && t.day === nowTuple.day;
+    });
+    if (calendarTodayIdx < 0) calendarTodayIdx = 0;
+
     // After the last prayer of the day has passed, roll the window forward:
     // tomorrow becomes "Today", the day after becomes the first future column, etc.
-    const startIdx    = this.allPrayersPast ? 1 : 0;
-    const nowTuple    = this._nowTupleInTz();  // current date in target tz
+    const startIdx = this.allPrayersPast ? calendarTodayIdx + 1 : calendarTodayIdx;
 
     const visibleDays = days.slice(startIdx, startIdx + totalCols).map((d, i) => {
       if (i !== 0) return d;
