@@ -173,6 +173,7 @@ Module.register("MMM-PrayerTimePro", {
 
   stop () {
     clearInterval(this._tick);
+    if (this._staleCacheRetry) clearTimeout(this._staleCacheRetry);
   },
 
   getStyles ()  { return ["MMM-PrayerTimePro.css"]; },
@@ -242,6 +243,12 @@ Module.register("MMM-PrayerTimePro", {
         this.updateDom(this.config.animationSpeed);
         // Force show in case MM hid the module while waiting for data
         this.show(this.config.animationSpeed, () => {}, { force: true });
+        // Stale cache was served (network not ready on boot) — retry in 2 minutes
+        if (this._staleCacheRetry) clearTimeout(this._staleCacheRetry);
+        if (payload.staleCache) {
+          Log.warn(`[MMM-PrayerTimePro] Stale cache from ${payload.date} — retrying in 2 min`);
+          this._staleCacheRetry = setTimeout(() => this.fetchPrayerTimes(), 2 * 60 * 1000);
+        }
         break;
 
       case "PRAYER_TIME_GEOCODE_RESULT":

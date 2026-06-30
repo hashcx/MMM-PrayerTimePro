@@ -93,9 +93,11 @@ module.exports = NodeHelper.create({
 
       if (fs.existsSync(cacheFile)) {
         try {
-          const cached = JSON.parse(fs.readFileSync(cacheFile, "utf8"));
-          console.log(`[MMM-PrayerTimePro] ${instanceId} serving cached data from`, cached.date);
-          this.sendSocketNotification("PRAYER_TIME_DATA", { ...cached, instanceId });
+          const cached   = JSON.parse(fs.readFileSync(cacheFile, "utf8"));
+          const todayStr = this._tupleToDateString(baseTuple);
+          const stale    = cached.date !== todayStr;
+          console.log(`[MMM-PrayerTimePro] ${instanceId} serving ${stale ? "STALE " : ""}cached data from`, cached.date);
+          this.sendSocketNotification("PRAYER_TIME_DATA", { ...cached, instanceId, staleCache: stale });
           return;
         } catch (_) {}
       }
